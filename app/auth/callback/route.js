@@ -15,7 +15,7 @@ export async function GET(request) {
       return NextResponse.redirect(origin);
     }
 
-    console.log("AUTH ERROR:", error);
+    console.error("OAuth callback error:", error.message);
   }
 
   return NextResponse.redirect(`${origin}/login`);

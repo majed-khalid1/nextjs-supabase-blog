@@ -22,7 +22,7 @@ const GoogleLogin = () => {
   return (
     <button
       onClick={handleGoogleLogin}
-      className="rounded-lg border px-5 py-3 font-medium"
+      className="text-base rounded-lg border px-5 py-3 font-medium"
     >
       Continue with Google
     </button>
