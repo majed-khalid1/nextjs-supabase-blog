@@ -9,26 +9,40 @@ export const PostList = async () => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: posts, error } = await supabase
+  const { data: posts } = await supabase
     .from("posts")
-    .select("*")
-    .order("id", { ascending: true });
-  if (error) {
-    return <p>Failed to load posts.</p>;
+    .select("id, title, body")
+    .order("id", { ascending: false });
+  if (!posts || posts.length === 0) {
+    return (
+      <p className="rounded-lg border border-zinc-200 p-8 text-center text-zinc-500">
+        No posts have been created yet.
+      </p>
+    );
   }
-  const isLoggedIn = !!user;
+  const isLoggedIn = Boolean(user);
 
   return (
-    <ul className="space-y-6">
+    <ul className="grid gap-5 md:grid-cols-2">
       {posts.map((post) => (
-        <li key={post.id} className="flex items-center mt-3">
+        <li
+          key={post.id}
+          className="flex flex-col rounded-xl border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow"
+        >
           {/* Post title */}
-          <Link href={`/posts/${post.id}`} className="pr-10">
-            {post.id} - {post.title}
+          <p className="mb-2 text-sm font-medium text-zinc-500">
+            Post #{post.id}
+          </p>
+
+          <Link
+            href={`/posts/${post.id}`}
+            className="text-xl font-semibold text-zinc-900 hover:text-blue-600"
+          >
+            {post.title}
           </Link>
 
           {/* Edit + Delete */}
-          <div className="flex items-center gap-2">
+          <div className="mt-auto flex items-center justify-center gap-2 pt-6">
             <EditLink postId={post.id} isLoggedIn={isLoggedIn} />
 
             <DeleteButton postId={post.id} isLoggedIn={isLoggedIn} />

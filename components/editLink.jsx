@@ -7,7 +7,8 @@ const EditLink = ({ postId, isLoggedIn }) => {
     if (!isLoggedIn) {
       e.preventDefault();
 
-      alert("Please log in first.");
+      alert("Log in to edit posts.");
+      return null;
     }
   };
 
@@ -15,7 +16,7 @@ const EditLink = ({ postId, isLoggedIn }) => {
     <Link
       href={`/posts/${postId}/edit`}
       onClick={handleClick}
-      className="rounded bg-blue-600 px-8 py-2 text-lg font-medium  text-white hover:bg-blue-700"
+      className="rounded-md bg-blue-600 px-8 py-2 text-lg font-medium  text-white hover:bg-blue-700"
     >
       Edit
     </Link>

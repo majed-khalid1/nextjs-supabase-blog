@@ -3,11 +3,19 @@
 import { deletePost } from "@/actions/posts";
 
 const DeleteButton = ({ postId, isLoggedIn }) => {
-  const handleSubmit = (e) => {
+  const handleSubmit = (event) => {
     if (!isLoggedIn) {
-      e.preventDefault();
+      event.preventDefault();
 
-      alert("Please log in first.");
+      alert("Log in to delete posts.");
+      return null;
+    }
+
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this post?",
+    );
+    if (!confirmed) {
+      event.preventDefault();
     }
   };
 

@@ -5,37 +5,39 @@ import AuthGuard from "@/components/authGuard";
 import CreatePostSection from "@/components/createPostSection";
 const PostsPage = async () => {
   return (
-    <Suspense fallback={<p className="mt-10 text-center">Checking login...</p>}>
-      <AuthGuard>
-        <div className="space-y-8">
-          <section className="text-center text-4xl font-semibold">
-            <h1 className="text-center text-4xl font-smibold text-zinc-950 sm:text-5xl my-6">
-              page
-            </h1>
-            <div className="my-16">
-              <Suspense fallback={<p>Loading posts...</p>}>
-                <PostList />
-              </Suspense>
-            </div>
-            <div className="my-16">
-              <Suspense fallback={<p>Loading recently viewed posts...</p>}>
-                <RecentlyViewedPosts />
-              </Suspense>
-            </div>
-          </section>
+    <div className="space-y-8">
+      <section className="text-center text-4xl font-semibold">
+        <h1 className="text-center text-4xl font-semibold text-zinc-950 sm:text-5xl my-6">
+          Blog Posts
+        </h1>
 
-          <section className="space-y-4 border-t border-zinc-200 pt-6">
+        {/* Everyone can view posts */}
+        <div className="my-16">
+          <Suspense fallback={<p>Loading posts...</p>}>
+            <PostList />
+          </Suspense>
+        </div>
+
+        {/* Everyone can view recently viewed posts */}
+        <div className="my-16">
+          <Suspense fallback={<p>Loading recently viewed posts...</p>}>
+            <RecentlyViewedPosts />
+          </Suspense>
+        </div>
+      </section>
+      {/* Only logged-in users can create posts */}
+      <section className="space-y-4 border-t border-zinc-200 pt-6">
+        <Suspense fallback={<p className="text-center">Checking login...</p>}>
+          <AuthGuard>
             <div className="mx-auto max-w-4xl p-6 ">
               <h1 className="mb-6 text-2xl font-semibold">New post</h1>
 
-              <Suspense fallback={<p>Loading...</p>}>
-                <CreatePostSection />
-              </Suspense>
+              <CreatePostSection />
             </div>
-          </section>
-        </div>
-      </AuthGuard>
-    </Suspense>
+          </AuthGuard>
+        </Suspense>
+      </section>
+    </div>
   );
 };
 

@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
+import TrackRecentlyViewedPosts from "@/components/track-recently-viewed";
 import { Suspense } from "react";
 import Link from "next/link";
 
@@ -22,39 +23,47 @@ async function PostContent({ params }) {
   }
 
   return (
-    <article className="rounded-xl border border-zinc-200 bg-white p-8 shadow-sm">
-      <div className="mb-6 border-b border-zinc-200 pb-6">
-        <p className="mb-2 text-sm font-medium text-zinc-500">
-          Post #{post.id}
-        </p>
+    <>
+      <TrackRecentlyViewedPosts
+        post={{
+          id: post.id,
+          title: post.title,
+        }}
+      />
+      <article className="rounded-xl border border-zinc-200 bg-white p-8 shadow-sm">
+        <div className="mb-6 border-b border-zinc-200 pb-6">
+          <p className="mb-2 text-sm font-medium text-zinc-500">
+            Post #{post.id}
+          </p>
 
-        <h1 className="text-3xl font-bold leading-tight text-zinc-950 sm:text-4xl">
-          {post.title}
-        </h1>
-      </div>
+          <h1 className="text-3xl font-bold leading-tight text-zinc-950 sm:text-4xl">
+            {post.title}
+          </h1>
+        </div>
 
-      <div>
-        <h2 className="mb-3 text-lg font-semibold text-zinc-900">Content</h2>
+        <div>
+          <h2 className="mb-3 text-lg font-semibold text-zinc-900">Content</h2>
 
-        <p className="text-lg leading-8 text-zinc-700">{post.body}</p>
-      </div>
+          <p className="text-lg leading-8 text-zinc-700">{post.body}</p>
+        </div>
 
-      <div className="mt-8 flex gap-3">
-        <Link
-          href="/posts"
-          className="rounded-md border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100"
-        >
-          Back to posts
-        </Link>
+        <div className="mt-8 flex gap-3">
+          <Link
+            href="/posts"
+            className="rounded-md border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100"
+          >
+            Back to posts
+          </Link>
 
-        <Link
-          href={`/posts/${post.id}/edit`}
-          className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-        >
-          Edit post
-        </Link>
-      </div>
-    </article>
+          <Link
+            href={`/posts/${post.id}/edit`}
+            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+          >
+            Edit post
+          </Link>
+        </div>
+      </article>
+    </>
   );
 }
 

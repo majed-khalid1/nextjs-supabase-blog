@@ -8,20 +8,18 @@ const AuthGuard = async ({ children }) => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (user) {
+  if (!user) {
     return (
-      <div className="mt-20 text-center">
-        <h1 className="text-3xl font-semibold">
-          You must be logged in to edit on posts.
-        </h1>
-
-        <p className="mt-3 text-zinc-600">Please log in to continue.</p>
+      <div className="mx-auto max-w-4xl p-6 text-center">
+        <p className="text-zinc-600">
+          Log in to create, edit, or delete posts.
+        </p>
 
         <Link
           href="/login"
-          className="mt-6 inline-block rounded bg-black px-5 py-2 text-white"
+          className="mt-4 inline-block rounded bg-zinc-900 px-5 py-2 text-white hover:bg-zinc-700"
         >
-          Log In
+          Login
         </Link>
       </div>
     );
