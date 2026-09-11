@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Supabase Blog
+
+A full-stack blog application built with Next.js, Supabase, and Tailwind CSS. Visitors can browse posts publicly, while authenticated users can create, edit, and delete posts using Google authentication.
+
+## Features
+
+- Public post browsing
+- Google OAuth authentication with Supabase
+- Create, edit, and delete posts for authenticated users
+- Individual pages for each post
+- Recently viewed posts stored with cookies
+- Responsive interface built with Tailwind CSS
+- Server Components, Server Actions, and Suspense
+
+## Screenshots
+
+### Home page
+
+![Home page](./public/screenshots/home-page.png)
+
+### Posts page
+
+![Posts page](./public/screenshots/posts-page.png)
+
+### Login page
+
+![Login page](./public/screenshots/login-page.png)
+
+## Technologies
+
+- Next.js
+- React
+- JavaScript
+- Tailwind CSS
+- Supabase Database
+- Supabase Authentication
+- Google OAuth
+- Coolify
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Install the following software:
+
+- Node.js
+- npm
+- Git
+
+You also need a Supabase project with a `posts` table and Google authentication configured.
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/majed-khalid1/nextjs-supabase-blog.git
+```
+
+2. Open the project directory:
+
+```bash
+cd nextjs-supabase-blog
+```
+
+3. Install the dependencies:
+
+```bash
+npm install
+```
+
+4. Create a `.env.local` file in the project root:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+```
+
+5. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Database
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The project uses a Supabase `posts` table. A basic table can contain:
 
-## Learn More
+| Column | Type | Description |
+| --- | --- | --- |
+| `id` | Integer | Primary key |
+| `title` | Text | Post title |
+| `content` | Text | Post content |
 
-To learn more about Next.js, take a look at the following resources:
+Row Level Security should allow public read access and restrict create, update, and delete operations to authenticated users.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Authentication
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Google OAuth is handled through Supabase Authentication. After signing in, users are redirected to `/auth/callback`, where the authorization code is exchanged for a session.
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application can be deployed with Coolify using:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+Repository: https://github.com/majed-khalid1/nextjs-supabase-blog.git
+Branch: main
+Base directory: /
+Build pack: Nixpacks
+```
+
+Add the Supabase environment variables in Coolify before deploying.
+
+## Author
+
+Majed Khalid  
+Final-year Software Engineering student and front-end developer based in Jeddah, Saudi Arabia.
+
+- GitHub: [majed-khalid1](https://github.com/majed-khalid1)
+
+## Project Status
+
+This project was created as a learning project to strengthen practical skills in Next.js, Supabase, authentication, database operations, and deployment.
