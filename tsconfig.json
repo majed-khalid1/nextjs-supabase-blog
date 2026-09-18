@@ -36,6 +36,6 @@
     "utils/supabase/server.js",
     "actions/posts.jsx",
     "app/posts/[id]/edit/page.jsx"
-  ],
+, "app/layout.jsx", "app/page.jsx", "app/layout.jsx"  ],
   "exclude": ["node_modules"]
 }
